@@ -12,7 +12,7 @@ use Walnut\Lib\HttpMapper\RequestMapper;
 #[Attribute]
 final class FromQuery implements RequestMapper {
 
-	public function __construct(private /*readonly*/ ?string $queryVar = null, private /*readonly*/ string $defaultValue = '') {}
+	public function __construct(private readonly ?string $queryVar = null, private readonly string $defaultValue = '') {}
 
 	/**
 	 * @param ServerRequestInterface $request

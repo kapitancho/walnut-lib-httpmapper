@@ -17,6 +17,7 @@ interface ResponseMapper {
 	public function mapValue(
 		mixed $value,
 		ResponseBuilder $responseBuilder,
-		ResponseRenderer $responseRenderer
+		ResponseRenderer $responseRenderer,
+		ViewRenderer $viewRenderer
 	): ResponseInterface;
 }

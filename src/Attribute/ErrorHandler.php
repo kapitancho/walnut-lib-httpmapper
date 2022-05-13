@@ -12,5 +12,5 @@ final class ErrorHandler {
 	/**
 	 * @param class-string $className
 	 */
-	public function __construct(public /*readonly*/ string $className) {}
+	public function __construct(public readonly string $className) {}
 }

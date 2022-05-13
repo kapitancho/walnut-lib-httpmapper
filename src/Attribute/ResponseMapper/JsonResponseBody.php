@@ -4,7 +4,7 @@ namespace Walnut\Lib\HttpMapper\Attribute\ResponseMapper;
 
 use Attribute;
 use Psr\Http\Message\ResponseInterface;
-use Walnut\Lib\HttpMapper\{ResponseBuilder, ResponseMapper, ResponseRenderer};
+use Walnut\Lib\HttpMapper\{ResponseBuilder, ResponseMapper, ResponseRenderer, ViewRenderer};
 
 /**
  * @package Walnut\Lib\Http\Controller
@@ -13,7 +13,7 @@ use Walnut\Lib\HttpMapper\{ResponseBuilder, ResponseMapper, ResponseRenderer};
 final class JsonResponseBody implements ResponseMapper {
 
 	public function __construct(
-		public /*readonly*/ int $statusCode = 200
+		public readonly int $statusCode = 200
 	) {}
 
 	/**
@@ -25,7 +25,8 @@ final class JsonResponseBody implements ResponseMapper {
 	public function mapValue(
 		mixed $value,
 		ResponseBuilder $responseBuilder,
-		ResponseRenderer $responseRenderer
+		ResponseRenderer $responseRenderer,
+		ViewRenderer $viewRenderer
 	): ResponseInterface {
 		return $responseBuilder->jsonResponse($value, $this->statusCode);
 	}

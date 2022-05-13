@@ -4,7 +4,7 @@ namespace Walnut\Lib\HttpMapper\Attribute\ResponseMapper;
 
 use Attribute;
 use Psr\Http\Message\ResponseInterface;
-use Walnut\Lib\HttpMapper\{ResponseBuilder, ResponseMapper, ResponseRenderer};
+use Walnut\Lib\HttpMapper\{ResponseBuilder, ResponseMapper, ResponseRenderer, ViewRenderer};
 
 /**
  * @package Walnut\Lib\Http\Controller
@@ -16,7 +16,7 @@ final class CookieResponse implements ResponseMapper {
 	 * CookieResponse constructor.
 	 * @param string $cookieName
 	 */
-	public function __construct(private /*readonly*/ string $cookieName) {}
+	public function __construct(private readonly string $cookieName) {}
 
 	/**
 	 * @param mixed $value
@@ -27,7 +27,8 @@ final class CookieResponse implements ResponseMapper {
 	public function mapValue(
 		mixed $value,
 		ResponseBuilder $responseBuilder,
-		ResponseRenderer $responseRenderer
+		ResponseRenderer $responseRenderer,
+		ViewRenderer $viewRenderer
 	): ResponseInterface {
 		return $responseBuilder->emptyResponse()
 			->withHeader('Set-Cookie', "$this->cookieName=$value");

@@ -12,7 +12,7 @@ use Walnut\Lib\HttpMapper\RequestMapper;
 #[Attribute]
 final class FromRoute implements RequestMapper {
 
-	public function __construct(private /*readonly*/ ?string $routeArg = null, private /*readonly*/ string $defaultValue = '') {}
+	public function __construct(private readonly ?string $routeArg = null, private readonly string $defaultValue = '') {}
 
 	/**
 	 * @param ServerRequestInterface $request

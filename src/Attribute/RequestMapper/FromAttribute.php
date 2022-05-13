@@ -12,7 +12,7 @@ use Walnut\Lib\HttpMapper\RequestMapper;
 #[Attribute]
 final class FromAttribute implements RequestMapper {
 
-	public function __construct(private /*readonly*/ ?string $attributeName = null, private /*readonly*/ string $defaultValue = '') {}
+	public function __construct(private readonly ?string $attributeName = null, private readonly string $defaultValue = '') {}
 
 	/**
 	 * @param ServerRequestInterface $request

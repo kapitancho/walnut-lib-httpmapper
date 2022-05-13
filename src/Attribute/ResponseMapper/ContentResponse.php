@@ -4,7 +4,7 @@ namespace Walnut\Lib\HttpMapper\Attribute\ResponseMapper;
 
 use Attribute;
 use Psr\Http\Message\ResponseInterface;
-use Walnut\Lib\HttpMapper\{ResponseBuilder, ResponseMapper, ResponseRenderer};
+use Walnut\Lib\HttpMapper\{ResponseBuilder, ResponseMapper, ResponseRenderer, ViewRenderer};
 
 /**
  * @package Walnut\Lib\Http\Controller
@@ -17,7 +17,7 @@ final class ContentResponse implements ResponseMapper {
 	 * @param string $templateName
 	 */
 	public function __construct(
-		private /*readonly*/ string $templateName
+		private readonly string $templateName
 	) {}
 
 	/**
@@ -29,9 +29,10 @@ final class ContentResponse implements ResponseMapper {
 	public function mapValue(
 		mixed $value,
 		ResponseBuilder $responseBuilder,
-		ResponseRenderer $responseRenderer
+		ResponseRenderer $responseRenderer,
+		ViewRenderer $viewRenderer
 	): ResponseInterface {
-		return $responseBuilder->textResponse(
+		return $responseBuilder->htmlResponse(
 			$responseRenderer->render($this->templateName, $value)
 		);
 	}

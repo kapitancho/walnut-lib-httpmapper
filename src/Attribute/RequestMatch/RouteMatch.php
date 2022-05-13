@@ -32,10 +32,12 @@ class RouteMatch implements RequestMatch {
 	 * @param list<string>|null $methods
 	 * @param int $priority
 	 */
-	public function __construct(string $path = null, array $methods = null, private /*readonly*/ int $priority = 0) {
+	public function __construct(string $path = null, array $methods = null, private readonly int $priority = 0) {
 		if (is_string($path) && preg_match_all(self::ROUTE_PATTERN_MATCH, $path, $matches)) {
 			$this->pathArgs = $matches[1] ?? [];
 			$path = '^' . preg_replace(self::ROUTE_PATTERN_REPLACE, self::REPLACE_PATTERN, $path) . '$';
+		} elseif (is_string($path)) {
+			$path = '^' . $path . '$';
 		}
 		$this->path = is_string($path) ? strtolower($path) : null;
 		$this->methods = is_array($methods) ? array_map(static fn(string $method): string => strtolower($method), $methods) : null;

@@ -4,7 +4,7 @@ namespace Walnut\Lib\HttpMapper\Attribute\ResponseMapper;
 
 use Attribute;
 use Psr\Http\Message\ResponseInterface;
-use Walnut\Lib\HttpMapper\{ResponseBuilder, ResponseMapper, ResponseRenderer};
+use Walnut\Lib\HttpMapper\{ResponseBuilder, ResponseMapper, ResponseRenderer, ViewRenderer};
 
 /**
  * @package Walnut\Lib\Http\Controller
@@ -18,7 +18,7 @@ final class ResponseBody implements ResponseMapper {
 	 * @param string $contentType
 	 */
 	public function __construct(
-		private /*readonly*/ string $contentType = self::CONTENT_TYPE_HTML
+		private readonly string $contentType = self::CONTENT_TYPE_HTML
 	) {}
 
 
@@ -31,7 +31,8 @@ final class ResponseBody implements ResponseMapper {
 	public function mapValue(
 		mixed $value,
 		ResponseBuilder $responseBuilder,
-		ResponseRenderer $responseRenderer
+		ResponseRenderer $responseRenderer,
+		ViewRenderer $viewRenderer
 	): ResponseInterface {
 		return $responseBuilder->textResponse((string)$value)->withHeader(
 			ResponseBuilder::CONTENT_TYPE_HEADER, $this->contentType
